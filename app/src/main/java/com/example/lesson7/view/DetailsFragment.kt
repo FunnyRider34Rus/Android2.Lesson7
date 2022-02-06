@@ -96,7 +96,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
         val city = weatherBundle.city
         binding.itemViewCityName.text = city.city
         binding.itemViewCityTemp.text = weather.temperature.toString()
-        binding.itemViewCityFeelsLike.text = getString(R.string.feelsLike) + weather.feelsLike.toString()
+        binding.itemViewCityFeelsLike.text = getString(R.string.feelsLike) + " " + weather.feelsLike.toString()
         binding.itemViewCityCondition.text = weather.condition
 
         weather.icon.let {

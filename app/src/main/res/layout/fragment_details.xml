@@ -69,6 +69,13 @@
             android:textAppearance="?attr/textAppearanceBody1"
             android:textColor="?android:attr/textColorSecondary"
             tools:text="Название города" />
+
+        <View
+            android:layout_width="140dp"
+            android:background="@drawable/divider"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_height="5dp" />
+
     </com.google.android.material.card.MaterialCardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
