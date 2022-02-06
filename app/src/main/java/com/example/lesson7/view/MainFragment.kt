@@ -76,26 +76,7 @@ class MainFragment : Fragment() {
         }
 
         binding.recyclerView.adapter = adapter
-        binding.mainMenu.setOnItemSelectedListener { menu ->
-            when (menu.itemId) {
-                R.id.local_weather -> {
-                    viewModel.getWeatherFromLocalSourceRus()
-                    true
-                }
 
-                R.id.world_weather -> {
-                    viewModel.getWeatherFromLocalSourceWorld()
-                    true
-                }
-
-                R.id.settings -> {
-                    true
-                }
-                else -> {
-                    true
-                }
-            }
-        }
 
         binding.swipeToRefresh.setOnRefreshListener {
             viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }

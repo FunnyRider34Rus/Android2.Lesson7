@@ -19,5 +19,31 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, MainFragment.newInstance(bundle))
                 .commitNow()
         }
+
+        binding.mainMenu.setOnItemSelectedListener { menu ->
+            when (menu.itemId) {
+                R.id.local_weather -> {
+                    bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isRussian")
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, MainFragment.newInstance(bundle))
+                        .commitNow()
+                    true
+                }
+
+                R.id.world_weather -> {
+                    bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isWorld")
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.container, MainFragment.newInstance(bundle))
+                        .commitNow()
+                    true
+                }
+
+                R.id.settings -> {
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
