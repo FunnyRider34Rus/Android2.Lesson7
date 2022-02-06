@@ -41,7 +41,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
         viewModel.detailsLiveData.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getWeatherFromRemoteSource(weatherBundle.city.lat, weatherBundle.city.lon)
 
-        binding.mainMenu.setOnItemSelectedListener { menu ->
+        /*binding.mainMenu.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.local_weather -> {
                     bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isRussian")
@@ -61,7 +61,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
 
                 else -> false
             }
-        }
+        }*/
     }
 
     private fun renderData(appState: AppState) {

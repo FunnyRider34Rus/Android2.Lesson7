@@ -18,6 +18,7 @@ class MainFragment : Fragment() {
 
     companion object {
         const val BUNDLE_EXTRA_MENU = "menu"
+
         @JvmStatic
         val bundle = Bundle()
         fun newInstance(bundle: Bundle): MainFragment {
@@ -39,14 +40,18 @@ class MainFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
                 manager.beginTransaction()
-                    .replace(R.id.container, DetailsFragment.newInstance(bundle))
-                    .addToBackStack("")
+                    .add(R.id.container, DetailsFragment.newInstance(bundle))
+                    //.addToBackStack("")
                     .commit()
             }
         }
     })
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -86,12 +91,21 @@ class MainFragment : Fragment() {
                 R.id.settings -> {
                     true
                 }
-                else -> { true }
+                else -> {
+                    true
+                }
             }
+        }
+
+        binding.swipeToRefresh.setOnRefreshListener {
+            viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
+            viewModel.getWeatherFromLocalSourceRus()
+            binding.swipeToRefresh.isRefreshing = false
         }
     }
 
     private fun renderData(appState: AppState) {
+
         when (appState) {
             is AppState.Success -> {
                 binding.progressBar.visibility = View.GONE
