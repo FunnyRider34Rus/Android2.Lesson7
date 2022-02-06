@@ -6,12 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/city_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_margin"
-        app:cardCornerRadius="@dimen/small_margin">
+        app:cardCornerRadius="@dimen/small_margin"
+        android:layout_gravity="top">
 
         <ImageView
             android:id="@+id/item_view_city_image"
@@ -36,7 +44,7 @@
             android:layout_gravity="top|end"
             android:layout_margin="@dimen/small_margin"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            tools:text="Ощущается как"/>
+            tools:text="Ощущается как" />
 
         <TextView
             android:id="@+id/item_view_city_temp"
@@ -58,18 +66,12 @@
             tools:text="Название города" />
     </com.google.android.material.card.MaterialCardView>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_menu"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" />
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:menu="@menu/main_menu" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

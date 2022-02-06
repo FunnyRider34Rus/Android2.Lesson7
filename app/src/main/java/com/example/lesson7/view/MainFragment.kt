@@ -67,10 +67,7 @@ class MainFragment : Fragment() {
                 viewModel.getWeatherFromLocalSourceWorld()
                 false
             }
-            else -> {
-                viewModel.getWeatherFromLocalSourceRus()
-                true
-            }
+            else -> true
         }
 
         binding.recyclerView.adapter = adapter

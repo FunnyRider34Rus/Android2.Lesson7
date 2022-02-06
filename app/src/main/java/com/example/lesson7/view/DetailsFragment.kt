@@ -14,6 +14,7 @@ import com.example.lesson7.model.Weather
 import com.example.lesson7.model.WeatherDTO
 import com.example.lesson7.model.getDefaultCity
 import com.example.lesson7.utils.showSnackBar
+import com.example.lesson7.view.MainFragment.Companion.bundle
 import com.example.lesson7.viewmodel.AppState
 import com.example.lesson7.viewmodel.DetailsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -42,6 +43,28 @@ class DetailsFragment : BottomSheetDialogFragment() {
         weatherBundle = arguments?.getParcelable(BUNDLE_EXTRA) ?: Weather()
         viewModel.detailsLiveData.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getWeatherFromRemoteSource(weatherBundle.city.lat, weatherBundle.city.lon)
+
+        binding.mainMenu.setOnItemSelectedListener { menu ->
+            when (menu.itemId) {
+                R.id.local_weather -> {
+                    bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isRussian")
+                    activity?.supportFragmentManager?.popBackStack()
+                    true
+                }
+
+                R.id.world_weather -> {
+                    bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isWorld")
+                    activity?.supportFragmentManager?.popBackStack()
+                    true
+                }
+
+                R.id.settings -> {
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 
     private fun renderData(appState: AppState) {
@@ -76,8 +99,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
         val city = weatherBundle.city
         binding.itemViewCityName.text = city.city
         binding.itemViewCityTemp.text = weather.temperature.toString()
-        binding.itemViewCityFeelsLike.text =
-            getString(R.string.feelsLike) + weather.feelsLike.toString()
+        binding.itemViewCityFeelsLike.text = getString(R.string.feelsLike) + weather.feelsLike.toString()
         binding.itemViewCityCondition.text = weather.condition
     }
 
