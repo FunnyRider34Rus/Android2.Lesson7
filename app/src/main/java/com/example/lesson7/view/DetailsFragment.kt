@@ -1,24 +1,21 @@
 package com.example.lesson7.view
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.lesson7.R
 import com.example.lesson7.databinding.FragmentDetailsBinding
-import com.example.lesson7.model.FactDTO
 import com.example.lesson7.model.Weather
-import com.example.lesson7.model.WeatherDTO
-import com.example.lesson7.model.getDefaultCity
 import com.example.lesson7.utils.showSnackBar
 import com.example.lesson7.view.MainFragment.Companion.bundle
 import com.example.lesson7.viewmodel.AppState
 import com.example.lesson7.viewmodel.DetailsViewModel
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 
 private const val MAIN_LINK = "https://api.weather.yandex.ru/v2/forecast?"
 
@@ -101,6 +98,10 @@ class DetailsFragment : BottomSheetDialogFragment() {
         binding.itemViewCityTemp.text = weather.temperature.toString()
         binding.itemViewCityFeelsLike.text = getString(R.string.feelsLike) + weather.feelsLike.toString()
         binding.itemViewCityCondition.text = weather.condition
+
+        weather.icon.let {
+            GlideToVectorYou.justLoadImage(activity, Uri.parse("https://yastatic.net/weather/i/icons/blueye/color/svg/${it}.svg"), binding.itemViewCityImage)
+        }
     }
 
     companion object {

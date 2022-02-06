@@ -24,9 +24,10 @@
         <ImageView
             android:id="@+id/item_view_city_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/image_weather"
-            android:scaleType="centerCrop" />
+            android:scaleType="fitCenter"
+            android:padding="80dp"/>
 
         <TextView
             android:id="@+id/item_view_city_condition"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
             android:layout_margin="@dimen/small_margin"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             tools:text="Облачно" />
 
         <TextView
