@@ -63,11 +63,9 @@
             android:textColor="?android:attr/textColorSecondary"
             tools:text="Название города" />
 
-        <View
-            android:layout_width="60dp"
-            android:layout_height="6dp"
-            android:layout_gravity="top|center_horizontal"
-            android:background="@drawable/divider" />
+        <include
+            android:id="@+id/divider"
+            layout="@layout/divider" />
 
     </com.google.android.material.card.MaterialCardView>
 

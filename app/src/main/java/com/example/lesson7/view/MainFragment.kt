@@ -41,7 +41,6 @@ class MainFragment : Fragment() {
                 bundle.putParcelable(DetailsFragment.BUNDLE_EXTRA, weather)
                 manager.beginTransaction()
                     .add(R.id.container, DetailsFragment.newInstance(bundle))
-                    //.addToBackStack("")
                     .commit()
             }
         }

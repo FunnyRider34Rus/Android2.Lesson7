@@ -54,17 +54,19 @@ class DetailsFragment : BottomSheetDialogFragment() {
                 binding.includedLoadingLayout.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                binding.cityView.visibility = View.VISIBLE
-                binding.includedLoadingLayout.progressBar.visibility = View.GONE
-                binding.cityView.showSnackBar(
-                    getString(R.string.error),
-                    getString(R.string.reload),
-                    {
-                        viewModel.getWeatherFromRemoteSource(
-                            weatherBundle.city.lat,
-                            weatherBundle.city.lon
-                        )
-                    })
+                with (binding) {
+                    cityView.visibility = View.VISIBLE
+                    includedLoadingLayout.progressBar.visibility = View.GONE
+                    cityView.showSnackBar(
+                        getString(R.string.error),
+                        getString(R.string.reload),
+                        {
+                            viewModel.getWeatherFromRemoteSource(
+                                weatherBundle.city.lat,
+                                weatherBundle.city.lon
+                            )
+                        })
+                }
             }
         }
     }
@@ -73,10 +75,13 @@ class DetailsFragment : BottomSheetDialogFragment() {
     private fun setWeather(weather: Weather) {
         val city = weatherBundle.city
         saveCity(city, weather)
-        binding.itemViewCityName.text = city.city
-        binding.itemViewCityTemp.text = weather.temperature.toString()
-        binding.itemViewCityFeelsLike.text = getString(R.string.feelsLike) + " " + weather.feelsLike.toString()
-        binding.itemViewCityCondition.text = weather.condition
+        with(binding) {
+            itemViewCityName.text = city.city
+            itemViewCityTemp.text = weather.temperature.toString()
+            itemViewCityFeelsLike.text =
+                getString(R.string.feelsLike) + " " + weather.feelsLike.toString()
+            itemViewCityCondition.text = weather.condition
+        }
 
         weather.icon.let {
             GlideToVectorYou.justLoadImage(activity, Uri.parse("https://yastatic.net/weather/i/icons/blueye/color/svg/${it}.svg"), binding.itemViewCityImage)

@@ -34,12 +34,6 @@ class HistoryFragment : BottomSheetDialogFragment() {
         binding.historyFragmentRecyclerView.adapter = adapter
         viewModel.historyLiveData.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getAllHistory()
-
-        binding.swipeToRefresh.setOnRefreshListener {
-            viewModel.historyLiveData.observe(viewLifecycleOwner) { renderData(it) }
-            viewModel.getAllHistory()
-            binding.swipeToRefresh.isRefreshing = false
-        }
     }
 
     private fun renderData(appState: AppState) {
@@ -54,13 +48,15 @@ class HistoryFragment : BottomSheetDialogFragment() {
                 binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                binding.historyFragmentRecyclerView.visibility = View.VISIBLE
-                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
-                binding.historyFragmentRecyclerView.showSnackBar(getString(R.string.error),
-                    getString(R.string.reload),
-                    {
-                        viewModel.getAllHistory()
-                    })
+                with(binding) {
+                    historyFragmentRecyclerView.visibility = View.VISIBLE
+                    includedLoadingLayout.loadingLayout.visibility = View.GONE
+                    historyFragmentRecyclerView.showSnackBar(getString(R.string.error),
+                        getString(R.string.reload),
+                        {
+                            viewModel.getAllHistory()
+                        })
+                }
             }
         }
     }

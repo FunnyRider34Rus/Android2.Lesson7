@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean { return when (item.itemId) {
         R.id.menu_history -> { supportFragmentManager.apply {
             beginTransaction()
-                .replace(R.id.container, HistoryFragment.newInstance())
+                .add(R.id.container, HistoryFragment.newInstance())
                 .addToBackStack("HISTORY")
                 .commit()
         }
