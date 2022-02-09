@@ -89,16 +89,16 @@ class MainFragment : Fragment() {
 
         when (appState) {
             is AppState.Success -> {
-                binding.progressBar.visibility = View.GONE
+                binding.includedLoadingLayout.progressBar.visibility = View.GONE
                 binding.recyclerView.visibility = View.VISIBLE
                 adapter.setWeather(appState.weatherData)
             }
             is AppState.Loading -> {
-                binding.progressBar.visibility = View.VISIBLE
+                binding.includedLoadingLayout.progressBar.visibility = View.VISIBLE
                 binding.recyclerView.visibility = View.GONE
             }
             is AppState.Error -> {
-                binding.progressBar.visibility = View.GONE
+                binding.includedLoadingLayout.progressBar.visibility = View.GONE
                 binding.mainFragmentRootView.showSnackBar(
                     getString(R.string.error),
                     getString(R.string.reload),

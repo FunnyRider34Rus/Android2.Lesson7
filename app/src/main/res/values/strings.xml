@@ -9,4 +9,5 @@
     <string name="error">Ошибка</string>
     <string name="reload">Обновить</string>
     <string name="feelsLike">Ощущается как </string>
+    <string name="menu_title_history">История запросов</string>
 </resources>

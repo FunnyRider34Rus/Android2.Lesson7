@@ -5,11 +5,15 @@
       <map>
         <entry key="app/src/main/res/drawable/divider.xml" value="0.131" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_recycler_cities.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_recycler_history.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/loading_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/main_menu.xml" value="0.14175724637681159" />
         <entry key="app/src/main/res/layout/oval_divider.xml" value="0.1203125" />
+        <entry key="app/src/main/res/menu/history_menu.xml" value="0.2578125" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2578125" />
       </map>
     </option>

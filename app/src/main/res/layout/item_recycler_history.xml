@@ -3,23 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/error_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_cities_card_view"
+        android:id="@+id/item_history_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_margin"
         app:cardCornerRadius="@dimen/big_margin">
 
         <TextView
-            android:id="@+id/item_cities_list_view_city_name"
-            android:layout_width="wrap_content"
+            android:id="@+id/item_history_city"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:padding="@dimen/big_margin"
+            android:gravity="center"
             tools:text="Moscow" />
     </androidx.cardview.widget.CardView>
 </androidx.appcompat.widget.LinearLayoutCompat>

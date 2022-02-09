@@ -2,7 +2,10 @@ package com.example.lesson7
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.lesson7.databinding.ActivityMainBinding
+import com.example.lesson7.view.HistoryFragment
 import com.example.lesson7.view.MainFragment
 import com.example.lesson7.view.MainFragment.Companion.bundle
 
@@ -17,7 +20,9 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance(bundle))
-                .commitNow()
+                .setReorderingAllowed(true)
+                .addToBackStack("MAIN")
+                .commit()
         }
 
         binding.mainMenu.setOnItemSelectedListener { menu ->
@@ -26,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isRussian")
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, MainFragment.newInstance(bundle))
-                        .commitNow()
+                        .commit()
                     true
                 }
 
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     bundle.putString(MainFragment.BUNDLE_EXTRA_MENU, "isWorld")
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, MainFragment.newInstance(bundle))
-                        .commitNow()
+                        .commit()
                     true
                 }
 
@@ -45,5 +50,22 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.history_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean { return when (item.itemId) {
+        R.id.menu_history -> { supportFragmentManager.apply {
+            beginTransaction()
+                .replace(R.id.container, HistoryFragment.newInstance())
+                .addToBackStack("HISTORY")
+                .commit()
+        }
+            true
+        }
+        else -> super.onOptionsItemSelected(item) }
     }
 }

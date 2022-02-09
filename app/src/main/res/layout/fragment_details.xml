@@ -7,22 +7,15 @@
     android:layout_height="match_parent"
     android:layout_gravity="bottom">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/city_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin"
-        app:cardCornerRadius="@dimen/big_margin"
         android:layout_gravity="top"
+        android:layout_margin="@dimen/small_margin"
         app:behavior_hideable="true"
         app:behavior_peekHeight="500dp"
+        app:cardCornerRadius="@dimen/big_margin"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
@@ -30,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/image_weather"
-            android:scaleType="fitCenter"
-            android:padding="80dp"/>
+            android:padding="80dp"
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/item_view_city_condition"
@@ -72,9 +65,13 @@
 
         <View
             android:layout_width="60dp"
-            android:background="@drawable/divider"
+            android:layout_height="6dp"
             android:layout_gravity="top|center_horizontal"
-            android:layout_height="6dp" />
+            android:background="@drawable/divider" />
 
     </com.google.android.material.card.MaterialCardView>
+
+    <include
+        android:id="@+id/includedLoadingLayout"
+        layout="@layout/loading_layout" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,7 +2,10 @@ package com.example.lesson7.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.lesson7.App.Companion.getHistoryDao
 import com.example.lesson7.model.*
+import com.example.lesson7.room.LocalRepositoryHistory
+import com.example.lesson7.room.LocalRepositoryHistoryImpl
 import com.example.lesson7.utils.convertDtoToModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -14,12 +17,19 @@ private const val CORRUPTED_DATA = "Неполные данные"
 
 class DetailsViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryImpl: Repository = RepositoryImpl(RemoteDataSource())
+    private val repositoryImpl: Repository = RepositoryImpl(RemoteDataSource()),
+    private val historyRepository: LocalRepositoryHistory = LocalRepositoryHistoryImpl(getHistoryDao())
 ) : ViewModel() {
+
     fun getLiveData() = detailsLiveData
+
     fun getWeatherFromRemoteSource(lat: Double, lon: Double) {
         detailsLiveData.value = AppState.Loading
         repositoryImpl.getWeatherDetailsFromServer(lat, lon, callBack)
+    }
+
+    fun saveCityToDB(weather: Weather) {
+        historyRepository.saveEntity(weather)
     }
 
     private val callBack = object : Callback<WeatherDTO> {
@@ -46,7 +56,7 @@ class DetailsViewModel(
 
         private fun checkResponse(serverResponse: WeatherDTO): AppState {
             val fact = serverResponse.fact
-            return if (fact == null || fact.temp == null || fact.feels_like ==
+            return if (fact?.temp == null || fact.feels_like ==
                 null || fact.condition.isNullOrEmpty()
             ) {
                 AppState.Error(Throwable(CORRUPTED_DATA))

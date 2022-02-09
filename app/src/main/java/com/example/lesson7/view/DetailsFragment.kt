@@ -9,15 +9,15 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.example.lesson7.R
 import com.example.lesson7.databinding.FragmentDetailsBinding
+import com.example.lesson7.model.City
 import com.example.lesson7.model.Weather
 import com.example.lesson7.utils.showSnackBar
-import com.example.lesson7.view.MainFragment.Companion.bundle
 import com.example.lesson7.viewmodel.AppState
 import com.example.lesson7.viewmodel.DetailsViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-private const val MAIN_LINK = "https://api.weather.yandex.ru/v2/forecast?"
+//private const val MAIN_LINK = "https://api.weather.yandex.ru/v2/forecast?"
 
 class DetailsFragment : BottomSheetDialogFragment() {
 
@@ -46,16 +46,16 @@ class DetailsFragment : BottomSheetDialogFragment() {
         when (appState) {
             is AppState.Success -> {
                 binding.cityView.visibility = View.VISIBLE
-                binding.progressBar.visibility = View.GONE
+                binding.includedLoadingLayout.progressBar.visibility = View.GONE
                 setWeather(appState.weatherData[0])
             }
             is AppState.Loading -> {
                 binding.cityView.visibility = View.GONE
-                binding.progressBar.visibility = View.VISIBLE
+                binding.includedLoadingLayout.progressBar.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 binding.cityView.visibility = View.VISIBLE
-                binding.progressBar.visibility = View.GONE
+                binding.includedLoadingLayout.progressBar.visibility = View.GONE
                 binding.cityView.showSnackBar(
                     getString(R.string.error),
                     getString(R.string.reload),
@@ -72,6 +72,7 @@ class DetailsFragment : BottomSheetDialogFragment() {
     @SuppressLint("SetTextI18n")
     private fun setWeather(weather: Weather) {
         val city = weatherBundle.city
+        saveCity(city, weather)
         binding.itemViewCityName.text = city.city
         binding.itemViewCityTemp.text = weather.temperature.toString()
         binding.itemViewCityFeelsLike.text = getString(R.string.feelsLike) + " " + weather.feelsLike.toString()
@@ -80,6 +81,12 @@ class DetailsFragment : BottomSheetDialogFragment() {
         weather.icon.let {
             GlideToVectorYou.justLoadImage(activity, Uri.parse("https://yastatic.net/weather/i/icons/blueye/color/svg/${it}.svg"), binding.itemViewCityImage)
         }
+    }
+
+    private fun saveCity(city: City, weather: Weather) {
+        viewModel.saveCityToDB(
+            Weather(city, weather.temperature, weather.feelsLike, weather.condition)
+        )
     }
 
     companion object {
