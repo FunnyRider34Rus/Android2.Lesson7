@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/city_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        app:cardCornerRadius="@dimen/big_margin"
+        android:layout_gravity="top"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="500dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <ImageView
+            android:id="@+id/item_view_city_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/image_weather"
+            android:scaleType="fitCenter"
+            android:padding="80dp"/>
+
+        <TextView
+            android:id="@+id/item_view_city_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="@dimen/small_margin"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            tools:text="Облачно" />
+
+        <TextView
+            android:id="@+id/item_view_city_feels_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_margin="@dimen/small_margin"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            tools:text="Ощущается как" />
+
+        <TextView
+            android:id="@+id/item_view_city_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_margin="@dimen/small_margin"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            tools:text="Температура" />
+
+        <TextView
+            android:id="@+id/item_view_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/small_margin"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textColor="?android:attr/textColorSecondary"
+            tools:text="Название города" />
+
+        <View
+            android:layout_width="60dp"
+            android:background="@drawable/divider"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_height="6dp" />
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
