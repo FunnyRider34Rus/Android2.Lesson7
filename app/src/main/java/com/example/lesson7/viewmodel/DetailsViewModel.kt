@@ -21,7 +21,7 @@ class DetailsViewModel(
     private val historyRepository: LocalRepositoryHistory = LocalRepositoryHistoryImpl(getHistoryDao())
 ) : ViewModel() {
 
-    fun getLiveData() = detailsLiveData
+    //fun getLiveData() = detailsLiveData
 
     fun getWeatherFromRemoteSource(lat: Double, lon: Double) {
         detailsLiveData.value = AppState.Loading

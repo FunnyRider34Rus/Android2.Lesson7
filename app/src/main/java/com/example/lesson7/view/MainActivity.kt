@@ -1,12 +1,11 @@
-package com.example.lesson7
+package com.example.lesson7.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.example.lesson7.R
 import com.example.lesson7.databinding.ActivityMainBinding
-import com.example.lesson7.view.HistoryFragment
-import com.example.lesson7.view.MainFragment
 import com.example.lesson7.view.MainFragment.Companion.bundle
 
 class MainActivity : AppCompatActivity() {

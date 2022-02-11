@@ -21,7 +21,8 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolde
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         return RecyclerItemViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_recycler_history, parent, false) as View )
+                .inflate(R.layout.item_recycler_history, parent, false) as View
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
