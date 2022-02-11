@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_contacts"
+        android:title="@string/contacts"
+        android:icon="@drawable/ic_baseline_phone_24"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_history"
         android:title="@string/menu_title_history"
         android:icon="@drawable/ic_baseline_history_24"

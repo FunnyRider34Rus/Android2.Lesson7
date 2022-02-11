@@ -17,9 +17,18 @@ import com.example.lesson7.viewmodel.DetailsViewModel
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-//private const val MAIN_LINK = "https://api.weather.yandex.ru/v2/forecast?"
-
 class DetailsFragment : BottomSheetDialogFragment() {
+
+    companion object {
+        const val BUNDLE_EXTRA = "weather"
+
+        @JvmStatic
+        fun newInstance(bundle: Bundle): DetailsFragment {
+            val fragment = DetailsFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
@@ -92,17 +101,6 @@ class DetailsFragment : BottomSheetDialogFragment() {
         viewModel.saveCityToDB(
             Weather(city, weather.temperature, weather.feelsLike, weather.condition)
         )
-    }
-
-    companion object {
-        const val BUNDLE_EXTRA = "weather"
-
-        @JvmStatic
-        fun newInstance(bundle: Bundle): DetailsFragment {
-            val fragment = DetailsFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 
     override fun onDestroyView() {

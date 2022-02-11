@@ -15,6 +15,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class HistoryFragment : BottomSheetDialogFragment() {
 
+    companion object {
+        @JvmStatic
+        fun newInstance() = HistoryFragment()
+    }
+
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HistoryViewModel by lazy { ViewModelProvider(this).get(HistoryViewModel::class.java) }
@@ -62,10 +67,5 @@ class HistoryFragment : BottomSheetDialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = HistoryFragment()
     }
 }

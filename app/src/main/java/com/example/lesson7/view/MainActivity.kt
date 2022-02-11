@@ -56,15 +56,27 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean { return when (item.itemId) {
-        R.id.menu_history -> { supportFragmentManager.apply {
-            beginTransaction()
-                .add(R.id.container, HistoryFragment.newInstance())
-                .addToBackStack("HISTORY")
-                .commit()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_history -> {
+                supportFragmentManager.apply {
+                    beginTransaction()
+                        .add(R.id.container, HistoryFragment.newInstance())
+                        .addToBackStack("HISTORY")
+                        .commit()
+                }
+                true
+            }
+            R.id.menu_contacts -> {
+                supportFragmentManager.apply {
+                    beginTransaction()
+                        .replace(R.id.container, ContactsFragment.newInstance())
+                        .addToBackStack("CONTACTS")
+                        .commit()
+                }
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
-            true
-        }
-        else -> super.onOptionsItemSelected(item) }
     }
 }
