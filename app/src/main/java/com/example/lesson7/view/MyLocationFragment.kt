@@ -1,6 +1,7 @@
 package com.example.lesson7.view
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -13,8 +14,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.example.lesson7.MapsFragment
 import com.example.lesson7.R
-import com.example.lesson7.databinding.FragmentDetailsBinding
 import com.example.lesson7.databinding.FragmentMyLocationBinding
 import com.example.lesson7.model.City
 import com.example.lesson7.model.Weather
@@ -36,7 +37,7 @@ class MyLocationFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMyLocationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,6 +45,10 @@ class MyLocationFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPermission()
+        activity?.supportFragmentManager?.apply {
+            beginTransaction().add(R.id.container, MapsFragment.newInstance())
+                .addToBackStack("").commitAllowingStateLoss()
+        }
     }
 
     private fun checkPermission() {
@@ -131,6 +136,7 @@ class MyLocationFragment : BottomSheetDialogFragment() {
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLocation() {
         val REFRESH_PERIOD = 60000L
         val MINIMAL_DISTANCE = 100f
@@ -194,14 +200,14 @@ class MyLocationFragment : BottomSheetDialogFragment() {
         val geoCoder = Geocoder(context)
         //Thread {
         //    try {
-                val addresses = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-                //myLocationFragment.post {
-                    showAddressDialog(addresses[0].getAddressLine(0), location)
-                //}
-            }// catch (e: IOException) {
-             //   e.printStackTrace()
-        //    }
-        //}.start()}
+        val addresses = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+        //myLocationFragment.post {
+        showAddressDialog(addresses[0].getAddressLine(0), location)
+        //}
+    }// catch (e: IOException) {
+    //   e.printStackTrace()
+    //    }
+    //}.start()}
 
     private fun showAddressDialog(address: String, location: Location) {
         activity?.let {

@@ -4,11 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="bottom">
-
-    <include
-        android:id="@+id/divider"
-        layout="@layout/divider" />
+    android:layout_gravity="bottom"
+    >
 
     <include
         android:id="@+id/includedLoadingLayout"
