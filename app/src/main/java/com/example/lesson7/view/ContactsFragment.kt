@@ -3,7 +3,6 @@ package com.example.lesson7.view
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
-import android.content.Context
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.os.Bundle
@@ -13,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.example.lesson7.databinding.FragmentContactsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

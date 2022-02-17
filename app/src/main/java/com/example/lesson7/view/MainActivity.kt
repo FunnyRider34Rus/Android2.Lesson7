@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
 
+
+
         binding.mainMenu.setOnItemSelectedListener { menu ->
             when (menu.itemId) {
                 R.id.local_weather -> {
@@ -75,6 +77,15 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
                 true
+            }
+            R.id.menu_location -> {
+                supportFragmentManager.apply {
+                    beginTransaction()
+                        .replace(R.id.container, MyLocationFragment.newInstance())
+                        .addToBackStack("LOCATION")
+                        .commit()
+                }
+            true
             }
             else -> super.onOptionsItemSelected(item)
         }
