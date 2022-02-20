@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_location -> {
                 supportFragmentManager.apply {
                     beginTransaction()
-                        .replace(R.id.container, MyLocationFragment.newInstance())
+                        .replace(R.id.container, MapsFragment.newInstance())
                         .addToBackStack("LOCATION")
                         .commit()
                 }
