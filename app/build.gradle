@@ -4,6 +4,7 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
 
     //Room
     implementation 'androidx.room:room-runtime:2.4.1'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
     kapt 'androidx.room:room-compiler:2.4.1'
 
     //Google Maps

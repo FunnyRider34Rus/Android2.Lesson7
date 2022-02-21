@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lesson7">
 
+        <service android:name=".MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -38,7 +44,7 @@
             android:name=".contentprovider.WeatherContentProvider"
             android:authorities="@string/authorities"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
 
         <activity
             android:name=".view.MainActivity"
