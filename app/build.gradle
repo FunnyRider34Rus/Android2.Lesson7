@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -16,27 +20,94 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream ())
+        def apiKey = properties.getProperty("yandex_weather_api_key", "")
+        it.buildConfigField "String", "API_WEATHER_KEY", apiKey
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    signingConfigs {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("apikey.properties").newDataInputStream ())
+        //def nameKey = properties.getProperty("key")
+        //def passwordKey = properties.getProperty("pass")
+        //def aliasKey = properties.getProperty("alias")
+
+        release {
+            storeFile file("appVault.jks")
+            storePassword '3104167'
+            keyAlias("weather")
+            keyPassword = '3104167'
+        }
+        beta {
+            storeFile file("appVault.jks")
+            storePassword '3104167'
+            keyAlias("weather")
+            keyPassword '3104167'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            versionNameSuffix "-debug"
+        }
+        beta {
+            initWith debug
+            versionNameSuffix "-beta"
+            debuggable true
+        }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    flavorDimensions 'version'
+    productFlavors {
+        free {
+            dimension 'version'
+            versionNameSuffix '.free'
+        }
+        paid {
+            dimension 'version'
+            versionNameSuffix '.paid'
+        }
     }
 }
 
 dependencies {
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Room
+    implementation 'androidx.room:room-runtime:2.4.2'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    kapt 'androidx.room:room-compiler:2.4.2'
+
+    //Google Maps
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation project(path: ':library')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
