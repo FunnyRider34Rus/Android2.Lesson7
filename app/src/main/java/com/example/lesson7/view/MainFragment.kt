@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.example.lesson7.BuildConfig
 import com.example.lesson7.R
 import com.example.lesson7.databinding.FragmentMainBinding
 import com.example.lesson7.model.Weather
@@ -61,6 +62,8 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.getLiveData().observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getWeatherFromLocalSourceRus()
+
+        binding.appVersion.text = BuildConfig.BUILD_TYPE
 
         isDataSetRus = when (arguments?.getString(BUNDLE_EXTRA_MENU)) {
             "isRussian" -> {
